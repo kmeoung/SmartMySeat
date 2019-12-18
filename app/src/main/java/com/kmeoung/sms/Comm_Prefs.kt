@@ -1,9 +1,8 @@
-package com.truevalue.dreamappeal.utils
+package com.kmeoung.sms
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import com.kmeoung.mapstore.Comm_Params
 
 object Comm_Prefs {
 
@@ -20,39 +19,22 @@ object Comm_Prefs {
     fun init(context: Context) {
         mContext = context
         prefs = mContext!!.getSharedPreferences(Comm_Params.APP_NAME, MODE_PRIVATE)
-        if(getCreateIdm() == -1){
-            setCreateIdm(10)
-        }
-        if(getCreateIdo() == -1){
-            setCreateIdo(100)
-        }
     }
 
-    // 현재코드
-    fun setIdm(token : Int){
-        prefs!!.edit().putInt(Comm_Prefs_Param.PREFS_USER_IDM,token).commit()
+    fun setToken(token : String){
+        prefs!!.edit().putString(Comm_Prefs_Param.PREFS_TOKEN,token).commit()
     }
 
-    fun getIdm() : Int{
-        return prefs!!.getInt(Comm_Prefs_Param.PREFS_USER_IDM,-1)
+    fun getToken() : String?{
+        return prefs!!.getString(Comm_Prefs_Param.PREFS_TOKEN,null)
     }
 
-    // 생산코드
-    fun setCreateIdm(idx : Int){
-        prefs!!.edit().putInt(Comm_Prefs_Param.PREFS_CREATE_USER_IDM,idx).commit()
+    fun setUuid(token : String){
+        prefs!!.edit().putString(Comm_Prefs_Param.PREFS_UUID,token).commit()
     }
 
-    fun getCreateIdm() : Int{
-        return prefs!!.getInt(Comm_Prefs_Param.PREFS_CREATE_USER_IDM,-1)
-    }
-
-    // 생산코드
-    fun setCreateIdo(idx : Int){
-        prefs!!.edit().putInt(Comm_Prefs_Param.PREFS_CREATE_USER_IDM,idx).commit()
-    }
-
-    fun getCreateIdo() : Int{
-        return prefs!!.getInt(Comm_Prefs_Param.PREFS_CREATE_USER_IDM,-1)
+    fun getUuid() : String?{
+        return prefs!!.getString(Comm_Prefs_Param.PREFS_UUID,null)
     }
 
 

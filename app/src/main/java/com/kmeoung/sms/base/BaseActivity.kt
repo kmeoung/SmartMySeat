@@ -1,4 +1,4 @@
-package com.kmeoung.mapstore.base
+package com.kmeoung.sms.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

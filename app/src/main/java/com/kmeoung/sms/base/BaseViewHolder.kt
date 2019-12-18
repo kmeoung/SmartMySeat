@@ -1,4 +1,4 @@
-package com.truevalue.dreamappeal.base
+package com.kmeoung.sms.base
 
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView

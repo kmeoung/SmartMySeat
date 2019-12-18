@@ -2,15 +2,28 @@ package com.truevalue.dreamappeal.http
 
 import android.os.Handler
 import android.util.Log
+import com.kmeoung.sms.Comm_Prefs
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
+import java.lang.Exception
 
 
 object BaseOkhttpClient : OkHttpClient() {
 
     private val client: OkHttpClient
     private val handler: Handler
+
+    fun getHttpHeader(): BaseHttpHeader {
+        val header = BaseHttpHeader()
+        val token = Comm_Prefs.getToken()
+        if (!token.isNullOrEmpty()) {
+            header.put("Authorization", "Bearer $token")
+        }
+        return header
+    }
+
+    val DAOK = "DAOK"
 
     init {
         client = OkHttpClient()
@@ -31,9 +44,8 @@ object BaseOkhttpClient : OkHttpClient() {
             HttpType.DELETE -> delete(url, header, params)
             else -> post(url, header, params)
         }
-        if(params != null) Log.d("TEST", params.bodyParams().toString())
         val call = client.newCall(clientRequest)
-
+        Log.d("TEST URL : ", clientRequest.toString())
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 if (callback != null) {
@@ -46,7 +58,16 @@ object BaseOkhttpClient : OkHttpClient() {
                 val strBody = response.body!!.string()
                 Log.d("TEST", strBody)
                 if (callback != null) {
-                    handler.post(Runnable { callback.onResponse(call, response.code, strBody) })
+                    var code = ""
+                    try {
+                        val json = JSONObject(strBody)
+                        code = json.getString("code")
+                    }catch (e : Exception){
+                        e.printStackTrace()
+                    }finally {
+                        handler.post(Runnable { callback.onResponse(call, response.code, strBody,code) })
+                    }
+
                 }
 
             }

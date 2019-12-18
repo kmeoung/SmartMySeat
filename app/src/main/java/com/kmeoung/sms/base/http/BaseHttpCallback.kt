@@ -14,6 +14,7 @@ interface BaseHttpCallback {
     fun onResponse(
         call: Call,
         serverCode: Int,
-        body: String
+        body: String,
+        code : String
     )
 }

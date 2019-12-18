@@ -45,12 +45,12 @@
 
 
     <EditText
-        android:id="@+id/et_email"
+        android:id="@+id/et_id"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginTop="40dp"
         android:background="@color/white"
-        android:hint="email"
+        android:hint="ID"
         android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
         android:textColorHint="@color/color_1"

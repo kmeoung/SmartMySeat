@@ -1,11 +1,7 @@
-package com.kmeoung.mapstore.base
+package com.kmeoung.sms.base
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
-import com.truevalue.dreamappeal.base.BaseViewHolder
-import com.truevalue.dreamappeal.base.IORecyclerViewListener
-import java.util.*
-import kotlin.collections.ArrayList
+import androidx.recyclerview.widget.RecyclerView
 
 class BaseRecyclerViewAdapter2<T>(listener: IORecyclerViewListener) :
     RecyclerView.Adapter<BaseViewHolder>() {
